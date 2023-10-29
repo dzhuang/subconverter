@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 
-git clone https://github.com/curl/curl --depth=1 --branch curl-7_88_1
+git clone https://github.com/curl/curl --depth=1 --branch curl-8_4_0
 cd curl
 cmake -DCMAKE_BUILD_TYPE=Release -DCURL_USE_LIBSSH2=OFF -DHTTP_ONLY=ON -DCURL_USE_SCHANNEL=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_CURL_EXE=OFF -DCMAKE_INSTALL_PREFIX="$MINGW_PREFIX" -G "Unix Makefiles" -DHAVE_LIBIDN2=OFF -DCURL_USE_LIBPSL=OFF .
 make install -j4
@@ -43,6 +43,10 @@ cd toml11
 cmake -DCMAKE_INSTALL_PREFIX="$MINGW_PREFIX" -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=11 .
 make install -j4
 cd ..
+
+python -m ensurepip
+python -m pip install gitpython
+python scripts/update_rules.py -c scripts/rules_config.conf
 
 rm -f C:/Strawberry/perl/bin/pkg-config C:/Strawberry/perl/bin/pkg-config.bat
 cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" .

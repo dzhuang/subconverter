@@ -836,6 +836,15 @@ void explodeTrojan(std::string trojan, Proxy &node)
         path = getUrlArg(addition, "wspath");
         network = "ws";
     }
+    // support the trojan link format used by v2ryaN and X-ui.
+    // format: trojan://{password}@{server}:{port}?type=ws&security=tls&path={path (urlencoded)}&sni={host}#{name}
+    else if(getUrlArg(addition, "type") == "ws")
+    {
+        path = getUrlArg(addition, "path");
+        if(path.substr(0, 3) == "%2F")
+            path = urlDecode(path);
+        network = "ws";
+    }
 
     //Case GRPC
     if(getUrlArg(addition, "type") == "grpc")

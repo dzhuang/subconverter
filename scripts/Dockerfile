@@ -34,7 +34,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cmake -DCMAKE_CXX_STANDARD=11 . && \
     make install -j $THREADS && \
     cd .. && \
-    git clone https://github.com/MetaCubeX/subconverter --depth=1 && \
+    git clone https://github.com/coulsontl/subconverter --depth=1 && \
     cd subconverter && \
     [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$SHA"'/' src/version.h;\
     python3 -m ensurepip && \

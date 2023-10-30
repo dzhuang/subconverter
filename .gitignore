@@ -12,3 +12,4 @@ toml11
 yaml-cpp
 base/cache
 .history
+.DS_Store

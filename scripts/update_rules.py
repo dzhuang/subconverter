@@ -2,11 +2,11 @@ import configparser, shutil, glob, os, random, string
 import stat, logging, argparse
 from git import InvalidGitRepositoryError, repo as GitRepo
 
-def del_rw(action, name: str, exc):
+def del_rw(action, name, exc):
     os.chmod(name, stat.S_IWRITE)
     os.remove(name)
 
-def open_repo(path: str):
+def open_repo(path):
     if os.path.exists(repo_path) == False: return None
     try:
         return GitRepo.Repo(path)

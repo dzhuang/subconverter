@@ -40,7 +40,7 @@ install -d /usr/local/include/date/
 install -m644 libcron/externals/date/include/date/* /usr/local/include/date/
 cd ..
 
-git clone https://github.com/ToruNiina/toml11 --depth=1
+git clone https://github.com/ToruNiina/toml11 --branch v3.7.1 --depth=1 && \
 cd toml11
 cmake -DCMAKE_CXX_STANDARD=11 .
 make install -j4
@@ -55,9 +55,9 @@ make -j8
 rm subconverter
 c++ -Xlinker -unexported_symbol -Xlinker "*" -o base/subconverter -framework CoreFoundation -framework Security $(find CMakeFiles/subconverter.dir/src/ -name "*.o") $(find . -name "*.a") -lcurl -O3
 
-python -m ensurepip
-python -m pip install gitpython
-python scripts/update_rules.py -c scripts/rules_config.conf
+python3 -m ensurepip
+python3 -m pip install gitpython
+python3 scripts/update_rules.py -c scripts/rules_config.conf
 
 cd base
 chmod +rx subconverter

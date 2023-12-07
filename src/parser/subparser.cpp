@@ -205,6 +205,8 @@ void explodeHysteria2(std::string hysteria2, Proxy &node)
 {
     printf("explodeHysteria2\n");
     hysteria2 = urlSafeBase64Decode(regReplace(hysteria2, "(hysteria2|hy2)://", "hysteria2://"));
+    printf("before entering \n");
+    printf("%s\n", hysteria2.c_str());
     if(regMatch(hysteria2, "hysteria2://(.*?)@(.*?)[:](.*)"))
     {   printf("%s\n", hysteria2.c_str());
         printf("\n");

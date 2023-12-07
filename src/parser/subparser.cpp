@@ -206,7 +206,8 @@ void explodeHysteria2(std::string hysteria2, Proxy &node)
     printf("explodeHysteria2\n");
     hysteria2 = urlSafeBase64Decode(regReplace(hysteria2, "(hysteria2|hy2)://", "hysteria2://"));
     if(regMatch(hysteria2, "hysteria2://(.*?)@(.*?)[:](.*)"))
-    {
+    {   printf("%s\n", hysteria2.c_str());
+        printf("\n");
         explodeStdHysteria2(hysteria2, node);
         return;
     }
@@ -1354,7 +1355,7 @@ void explodeClash(Node yamlnode, std::vector<Proxy> &nodes)
 
             bool skipCertVerify;
             singleproxy["skip-cert-verify"] >> skipCertVerify;
-            if (skipCertVerify) {
+            if (skipCertVerify == true) {
                 insecure = "1";
             } else {
                 insecure = "0";
@@ -1454,6 +1455,9 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     std::string add, port, password, host, insecure, up, down, alpn, obfsParam, obfsPassword, remarks;
     std::string addition;
     hysteria2 = hysteria2.substr(12);
+    printf("-------in function 1-----\n");
+    printf("%s\n", hysteria2.c_str());
+    printf("\n");
     string_size pos;
 
     pos = hysteria2.rfind("#");
@@ -1461,6 +1465,11 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     {
         remarks = urlDecode(hysteria2.substr(pos + 1));
         hysteria2.erase(pos);
+        printf("-------in function 2-----\n");
+        printf("%s\n", remarks.c_str());
+        printf("%s\n", hysteria2.c_str());
+        printf("\n");
+        string_size pos;
     }
 
     pos = hysteria2.rfind("?");
@@ -1468,31 +1477,55 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     {
         addition = hysteria2.substr(pos + 1);
         hysteria2.erase(pos);
+        printf("-------in function 2-----\n");
+        printf("%s\n", addition.c_str());
+        printf("%s\n", hysteria2.c_str());
+        printf("\n");
+        string_size pos;
     }
 
     if(strFind(hysteria2, "@"))
     {
         if(regGetMatch(hysteria2, R"(^(.*?)@(.*)[:](\d+)$)", 4, 0, &password, &add, &port))
-            return;
+        {    printf("-------in function 3 quit-----\n");
+
+            printf("\n");
+            return;}
     }
     else
     {
         password = getUrlArg(addition,"password");
         if(password.empty())
+        { printf("-------in function 4 quit-----\n");
+          printf("\n");
           return;
+        }
 
         if(strFind(hysteria2, ":"))
         {
+            printf("-------in function 5-----\n");
+            printf("\n");
             if(regGetMatch(hysteria2, R"(^(.*)[:](\d+)$)", 3, 0, &add, &port))
+            {
+              printf("-------in function 6 quit-----\n");
+              printf("\n");
               return;
+            }
         }
         else
         {
           port = getUrlArg(addition,"port");
           if(port.empty())
-            return;
+          {printf("-------in function 7 no port-----\n");
+
+            printf("\n");
+
+            return;}
 
           add = hysteria2;
+          printf("-------in function 8-----\n");
+          printf("%s\n", add.c_str());
+          printf("\n");
         }
     }
 

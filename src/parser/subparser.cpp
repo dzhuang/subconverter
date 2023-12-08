@@ -1495,6 +1495,7 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     alpn = getUrlArg(addition,"alpn");
     obfsParam = getUrlArg(addition,"obfs");
     obfsPassword = getUrlArg(addition,"obfs-password");
+    host = getUrlArg(addition,"sni");
 
     if(remarks.empty())
         remarks = add + ":" + port;

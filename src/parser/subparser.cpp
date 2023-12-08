@@ -1482,7 +1482,7 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
             return;
     }
 
-    scv = getUrlArg(addition, "insecure") == "1" ? true : false;
+    scv = getUrlArg(addition, "insecure")
     up = getUrlArg(addition,"up");
     down = getUrlArg(addition,"down");
     alpn = getUrlArg(addition,"alpn");

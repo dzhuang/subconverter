@@ -1487,8 +1487,6 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
 
         if(regGetMatch(hysteria2, R"(^(.*)[:](\d+)$)", 3, 0, &add, &port))
             return;
-
-        add = hysteria2;
     }
 
     insecure = getUrlArg(addition, "insecure");

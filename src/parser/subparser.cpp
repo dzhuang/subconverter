@@ -204,6 +204,9 @@ void explodeHysteria(std::string hysteria, Proxy &node)
 void explodeHysteria2(std::string hysteria2, Proxy &node)
 {
     hysteria2 = regReplace(hysteria2, "(hysteria2|hy2)://", "hysteria2://");
+
+    // replace /? with ?
+    hysteria2 = regReplace(hysteria2, "/\\?", "?", true, false);
     if(regMatch(hysteria2, "hysteria2://(.*?)[:](.*)"))
     {
         explodeStdHysteria2(hysteria2, node);
@@ -1460,7 +1463,6 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     {
         remarks = urlDecode(hysteria2.substr(pos + 1));
         hysteria2.erase(pos);
-        string_size pos;
     }
 
     pos = hysteria2.rfind("?");
@@ -1468,7 +1470,6 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
     {
         addition = hysteria2.substr(pos + 1);
         hysteria2.erase(pos);
-        string_size pos;
     }
 
     if(strFind(hysteria2, "@"))

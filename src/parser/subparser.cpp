@@ -79,7 +79,7 @@ void hysteriaConstruct(Proxy &node, const std::string &group, const std::string 
     node.FakeType = type;
 }
 
-void hysteria2Construct(Proxy &node, const std::string &group, const std::string &remarks, const std::string &add, const std::string &port, const std::string &password, const std::string &host, const std::string &up, const std::string &down, const std::string &alpn, const std::string &obfsParam, const std::string &obfsPassword, tribool udp, tribool tfo, tribool scv)
+void hysteria2Construct(Proxy &node, const std::string &group, const std::string &remarks, const std::string &add, const std::string &port, const std::string &password, const std::string &host, const std::string &up, const std::string &down, const std::string &alpn, const std::string &obfsParam, const std::string &obfsPassword, const std::string &insecure, tribool udp, tribool tfo, tribool scv)
 {
     commonConstruct(node, ProxyType::Hysteria2, group, remarks, add, port, udp, tfo, scv, tribool());
     node.Password = password;
@@ -89,6 +89,7 @@ void hysteria2Construct(Proxy &node, const std::string &group, const std::string
     node.Alpn = alpn;
     node.OBFSParam = obfsParam;
     node.OBFSPassword = obfsPassword;
+    node.Insecure = insecure;
 }
 
 void vlessConstruct(Proxy &node, const std::string &group, const std::string &remarks, const std::string &add, const std::string &port, const std::string &type, const std::string &id, const std::string &aid, const std::string &net, const std::string &cipher, const std::string &flow, const std::string &mode, const std::string &path, const std::string &host, const std::string &edge, const std::string &tls,const std::string &pbk, const std::string &sid, const std::string &fp ,tribool udp, tribool tfo, tribool scv, tribool tls13)
@@ -1483,7 +1484,7 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node)
             return;
     }
 
-    scv = getUrlArg(addition, "insecure")
+    insecure = getUrlArg(addition, "insecure");
     up = getUrlArg(addition,"up");
     down = getUrlArg(addition,"down");
     alpn = getUrlArg(addition,"alpn");

@@ -497,6 +497,8 @@ void proxyToClash(std::vector<Proxy> &nodes, YAML::Node &yamlnode, const ProxyGr
                 singleproxy["password"].SetTag("str");
             if(!scv.is_undef())
                 singleproxy["skip-cert-verify"] = scv.get();
+            if (!x.AllowInsecure.is_undef())
+                singleproxy["skip-cert-verify"] = x.AllowInsecure.get();
             switch(hash_(x.TransferProtocol))
             {
             case "tcp"_hash:
